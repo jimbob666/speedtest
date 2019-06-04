@@ -42,7 +42,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 ## NEW: use creds to create a client to interact with the Google Drive API
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('/home/pi/speedtest/secret.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('C:\Users\gonzj637\Documents\speedtest\secret.json', scope)
 client = gspread.authorize(creds)
 
 
@@ -82,10 +82,6 @@ if __name__ == '__main__':
 
 response = subprocess.Popen('speedtest-cli --simple', shell=True, stdout=subprocess.PIPE).stdout.read()
 
-print (fahrenheit)
-print (getCPUuse())
-print (getRAMinfo())
-print (getDiskSpace())
 
 ping = re.findall('Ping:\s(.*?)\s', response, re.MULTILINE)
 download = re.findall('Download:\s(.*?)\s', response, re.MULTILINE)
@@ -102,7 +98,7 @@ print ("p ", ping[0], "d ", download[0], "u ", upload[0])
 ## Update Google Doc Section
 ## Find a workbook by name and open the first sheet
 sheet = client.open("speedtest.net").sheet1
-row_values = [ping[0], download[0], upload[0], timestamp, external_ip, internal_ip, fahrenheit, getCPUuse(), str(getRAMinfo()), str(getDiskSpace())]
+row_values = [ping[0], download[0], upload[0], timestamp, external_ip, internal_ip, "hp"]
 row_number = 2
 result = sheet.insert_row(row_values, row_number)
 
